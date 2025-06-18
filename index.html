@@ -1,231 +1,109 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ArtVision AI - Generate AI Images Instantly</title>
-    <meta name="description" content="Generate AI images instantly. Get 10 free credits and explore styles like Art, Anime, Realistic.">
-    <meta name="keywords" content="AI image generation, art, anime, realistic, AI art">
-    <meta name="author" content="ArtVision AI">
-    
-    <!-- Favicon -->
-    <link rel="icon" type="image/x-icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🎨</text></svg>">
-    
-    <!-- Tailwind CSS CDN -->
-    <script src="https://cdn.tailwindcss.com"></script>
-    
-    <!-- Custom CSS -->
-    <link rel="stylesheet" href="style.css">
-    
-    <!-- Font Awesome for icons -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>ArtVision AI</title>
+  <meta name="description" content="Generate AI images instantly. Get 10 free credits and explore styles like Art, Anime, Realistic.">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🎨</text></svg>">
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="style.css">
 </head>
-<body class="bg-gray-50 dark:bg-gray-900 transition-colors duration-300">
-    <!-- Navigation Bar -->
-    <nav class="fixed top-0 left-0 right-0 bg-white/90 dark:bg-gray-800/90 backdrop-blur-md border-b border-gray-200 dark:border-gray-700 z-50">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="flex justify-between items-center h-16">
-                <!-- Logo -->
-                <div class="flex items-center">
-                    <div class="text-2xl mr-2">🎨</div>
-                    <h1 class="text-xl font-bold text-gray-900 dark:text-white">ArtVision AI</h1>
-                </div>
-                
-                <!-- Navigation Items -->
-                <div class="flex items-center space-x-4">
-                    <button id="generateBtn" class="bg-gradient-to-r from-purple-600 to-blue-600 hover:from-purple-700 hover:to-blue-700 text-white px-4 py-2 rounded-lg font-medium transition-all duration-300 transform hover:scale-105">
-                        <i class="fas fa-magic mr-2"></i>Generate Image
-                    </button>
-                    
-                    <div class="bg-green-100 dark:bg-green-900 text-green-800 dark:text-green-200 px-3 py-1 rounded-full text-sm font-medium">
-                        <i class="fas fa-coins mr-1"></i>Credits: <span id="creditCount">10</span>
-                    </div>
-                    
-                    <button id="contactBtn" class="bg-gray-100 dark:bg-gray-700 hover:bg-gray-200 dark:hover:bg-gray-600 text-gray-700 dark:text-gray-300 px-4 py-2 rounded-lg font-medium transition-all duration-300">
-                        <i class="fas fa-envelope mr-2"></i>Contact Us
-                    </button>
-                    
-                    <button id="themeToggle" class="p-2 rounded-lg bg-gray-100 dark:bg-gray-700 hover:bg-gray-200 dark:hover:bg-gray-600 transition-all duration-300">
-                        <i class="fas fa-moon dark:hidden"></i>
-                        <i class="fas fa-sun hidden dark:block text-yellow-400"></i>
-                    </button>
-                </div>
-            </div>
-        </div>
-    </nav>
-
-    <!-- Main Content -->
-    <main class="pt-20 pb-16">
-        <!-- Hero Section -->
-        <section class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
-            <div class="text-center mb-12">
-                <h2 class="text-4xl md:text-5xl font-bold text-gray-900 dark:text-white mb-4">
-                    Transform Your Ideas Into
-                    <span class="bg-gradient-to-r from-purple-600 to-blue-600 bg-clip-text text-transparent">Stunning Art</span>
-                </h2>
-                <p class="text-xl text-gray-600 dark:text-gray-300 max-w-2xl mx-auto">
-                    Generate beautiful AI-powered images with just a text prompt. Choose from multiple styles and bring your imagination to life.
-                </p>
-            </div>
-
-            <!-- Input Section -->
-            <div class="bg-white dark:bg-gray-800 rounded-2xl shadow-xl p-6 md:p-8 mb-8">
-                <div class="space-y-6">
-                    <!-- Prompt Input -->
-                    <div>
-                        <label for="promptInput" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
-                            <i class="fas fa-pen mr-2"></i>Describe your image
-                        </label>
-                        <textarea 
-                            id="promptInput" 
-                            placeholder="Enter your image prompt... (e.g., A majestic dragon flying over a medieval castle at sunset)"
-                            class="w-full px-4 py-3 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent bg-white dark:bg-gray-700 text-gray-900 dark:text-white placeholder-gray-500 dark:placeholder-gray-400 resize-none"
-                            rows="3"
-                        ></textarea>
-                    </div>
-
-                    <!-- Style Selection -->
-                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-                        <div>
-                            <label for="styleSelect" class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
-                                <i class="fas fa-palette mr-2"></i>Art Style
-                            </label>
-                            <select 
-                                id="styleSelect" 
-                                class="w-full px-4 py-3 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent bg-white dark:bg-gray-700 text-gray-900 dark:text-white"
-                            >
-                                <option value="art">🎨 Art</option>
-                                <option value="anime">🌸 Anime</option>
-                                <option value="realistic">📷 Realistic</option>
-                                <option value="fantasy">🐉 Fantasy</option>
-                                <option value="abstract">🎭 Abstract</option>
-                            </select>
-                        </div>
-                        
-                        <div>
-                            <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-2">
-                                <i class="fas fa-image mr-2"></i>Image Size
-                            </label>
-                            <select 
-                                id="sizeSelect" 
-                                class="w-full px-4 py-3 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent bg-white dark:bg-gray-700 text-gray-900 dark:text-white"
-                            >
-                                <option value="512x512">512x512</option>
-                                <option value="768x768">768x768</option>
-                                <option value="1024x1024">1024x1024</option>
-                            </select>
-                        </div>
-                    </div>
-
-                    <!-- Generate Button -->
-                    <div class="text-center">
-                        <button 
-                            id="mainGenerateBtn" 
-                            class="bg-gradient-to-r from-purple-600 to-blue-600 hover:from-purple-700 hover:to-blue-700 text-white px-8 py-4 rounded-xl font-semibold text-lg transition-all duration-300 transform hover:scale-105 shadow-lg hover:shadow-xl disabled:opacity-50 disabled:cursor-not-allowed disabled:transform-none"
-                        >
-                            <i class="fas fa-magic mr-2"></i>
-                            <span id="generateBtnText">Generate Image</span>
-                            <div id="loadingSpinner" class="hidden inline-block ml-2">
-                                <i class="fas fa-spinner fa-spin"></i>
-                            </div>
-                        </button>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Gallery Section -->
-            <div class="mb-8">
-                <h3 class="text-2xl font-bold text-gray-900 dark:text-white mb-6">
-                    <i class="fas fa-images mr-2"></i>Generated Images
-                </h3>
-                <div id="imageGallery" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                    <!-- Images will be added here dynamically -->
-                </div>
-                
-                <!-- Empty State -->
-                <div id="emptyState" class="text-center py-12">
-                    <div class="text-6xl mb-4">🎨</div>
-                    <h4 class="text-xl font-semibold text-gray-700 dark:text-gray-300 mb-2">No images generated yet</h4>
-                    <p class="text-gray-500 dark:text-gray-400">Enter a prompt above and click generate to create your first AI image!</p>
-                </div>
-            </div>
-        </section>
-    </main>
-
-    <!-- Footer -->
-    <footer class="bg-white dark:bg-gray-800 border-t border-gray-200 dark:border-gray-700 py-8">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="flex flex-col md:flex-row justify-between items-center">
-                <div class="text-gray-600 dark:text-gray-400 mb-4 md:mb-0">
-                    © 2024 ArtVision AI. All rights reserved.
-                </div>
-                <div class="flex items-center space-x-4">
-                    <a href="mailto:samadus2005@gmail.com" class="text-gray-600 dark:text-gray-400 hover:text-purple-600 dark:hover:text-purple-400 transition-colors duration-300">
-                        <i class="fas fa-envelope mr-2"></i>samadus2005@gmail.com
-                    </a>
-                </div>
-            </div>
-        </div>
-    </footer>
-
-    <!-- Contact Modal -->
-    <div id="contactModal" class="fixed inset-0 bg-black bg-opacity-50 z-50 hidden">
-        <div class="flex items-center justify-center min-h-screen p-4">
-            <div class="bg-white dark:bg-gray-800 rounded-2xl shadow-2xl max-w-md w-full p-6">
-                <div class="flex justify-between items-center mb-6">
-                    <h3 class="text-xl font-bold text-gray-900 dark:text-white">
-                        <i class="fas fa-envelope mr-2"></i>Contact Us
-                    </h3>
-                    <button id="closeModal" class="text-gray-500 hover:text-gray-700 dark:text-gray-400 dark:hover:text-gray-200">
-                        <i class="fas fa-times text-xl"></i>
-                    </button>
-                </div>
-                
-                <div class="space-y-4">
-                    <div class="bg-blue-50 dark:bg-blue-900/20 p-4 rounded-lg">
-                        <p class="text-blue-800 dark:text-blue-200 text-sm">
-                            <i class="fas fa-info-circle mr-2"></i>
-                            Need more credits? Contact us to purchase additional credits for your AI image generation.
-                        </p>
-                    </div>
-                    
-                    <div class="space-y-3">
-                        <div class="flex items-center p-3 bg-gray-50 dark:bg-gray-700 rounded-lg">
-                            <i class="fas fa-envelope text-purple-600 mr-3"></i>
-                            <a href="mailto:samadus2005@gmail.com" class="text-gray-700 dark:text-gray-300 hover:text-purple-600 dark:hover:text-purple-400">
-                                samadus2005@gmail.com
-                            </a>
-                        </div>
-                        
-                        <div class="flex items-center p-3 bg-gray-50 dark:bg-gray-700 rounded-lg">
-                            <i class="fas fa-clock text-purple-600 mr-3"></i>
-                            <span class="text-gray-700 dark:text-gray-300">Response within 24 hours</span>
-                        </div>
-                    </div>
-                    
-                    <div class="pt-4">
-                        <button id="closeModalBtn" class="w-full bg-gradient-to-r from-purple-600 to-blue-600 hover:from-purple-700 hover:to-blue-700 text-white py-3 rounded-lg font-medium transition-all duration-300">
-                            Close
-                        </button>
-                    </div>
-                </div>
-            </div>
-        </div>
+<body class="bg-gray-50 dark:bg-gray-900 min-h-screen transition-colors duration-300">
+  <!-- Navbar -->
+  <nav class="fixed w-full top-0 left-0 bg-white/80 dark:bg-gray-800/80 shadow z-50">
+    <div class="max-w-5xl mx-auto flex items-center justify-between px-4 py-3">
+      <div class="flex items-center space-x-2">
+        <span class="text-2xl">🎨</span>
+        <span class="font-bold text-xl text-gray-900 dark:text-white">ArtVision AI</span>
+      </div>
+      <div class="flex items-center space-x-3">
+        <button id="generateBtn" class="hidden md:inline-block bg-gradient-to-r from-purple-600 to-blue-600 text-white px-4 py-2 rounded-lg font-medium shadow hover:scale-105 transition">Generate Image</button>
+        <span class="bg-green-100 text-green-800 px-3 py-1 rounded-full font-semibold text-sm" id="creditBadge">Credits: <span id="creditCount">10</span></span>
+        <button id="contactBtn" class="bg-gray-100 dark:bg-gray-700 text-gray-700 dark:text-gray-200 px-4 py-2 rounded-lg font-medium hover:bg-gray-200 dark:hover:bg-gray-600 transition">Contact Us</button>
+        <button id="themeToggle" class="ml-2 p-2 rounded-lg bg-gray-100 dark:bg-gray-700 hover:bg-gray-200 dark:hover:bg-gray-600 transition">
+          <span id="themeIcon">🌙</span>
+        </button>
+      </div>
     </div>
+  </nav>
 
-    <!-- Image Preview Modal -->
-    <div id="imageModal" class="fixed inset-0 bg-black bg-opacity-90 z-50 hidden">
-        <div class="flex items-center justify-center min-h-screen p-4">
-            <div class="relative max-w-4xl w-full">
-                <button id="closeImageModal" class="absolute top-4 right-4 text-white hover:text-gray-300 text-2xl z-10">
-                    <i class="fas fa-times"></i>
-                </button>
-                <img id="modalImage" src="" alt="Generated Image" class="w-full h-auto rounded-lg shadow-2xl">
-            </div>
+  <!-- Main -->
+  <main class="pt-24 pb-10 max-w-5xl mx-auto px-4">
+    <section class="bg-white dark:bg-gray-800 rounded-2xl shadow-xl p-6 md:p-10 mb-8">
+      <div class="text-center mb-8">
+        <h2 class="text-3xl md:text-4xl font-bold text-gray-900 dark:text-white mb-2">Transform Your Ideas Into <span class="text-blue-600">Stunning Art</span></h2>
+        <p class="text-gray-600 dark:text-gray-300">Generate beautiful AI-powered images with just a text prompt. Choose from multiple styles and bring your imagination to life.</p>
+      </div>
+      <div class="grid md:grid-cols-3 gap-4 items-end">
+        <div class="md:col-span-2">
+          <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Describe your image</label>
+          <textarea id="promptInput" rows="2" placeholder="Enter your image prompt..." class="w-full px-4 py-3 border border-gray-300 dark:border-gray-600 rounded-lg focus:ring-2 focus:ring-purple-500 bg-white dark:bg-gray-700 text-gray-900 dark:text-white placeholder-gray-400 resize-none"></textarea>
         </div>
-    </div>
+        <div>
+          <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">Art Style</label>
+          <select id="styleSelect" class="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-700 text-gray-900 dark:text-white">
+            <option value="art">Art</option>
+            <option value="anime">Anime</option>
+            <option value="realistic">Realistic</option>
+          </select>
+          <label class="block text-sm font-medium text-gray-700 dark:text-gray-300 mt-3 mb-1">Image Size</label>
+          <select id="sizeSelect" class="w-full px-3 py-2 border border-gray-300 dark:border-gray-600 rounded-lg bg-white dark:bg-gray-700 text-gray-900 dark:text-white">
+            <option value="512x512">512x512</option>
+            <option value="768x768">768x768</option>
+            <option value="1024x1024">1024x1024</option>
+          </select>
+        </div>
+      </div>
+      <div class="text-center mt-6">
+        <button id="mainGenerateBtn" class="bg-gradient-to-r from-purple-600 to-blue-600 text-white px-8 py-3 rounded-xl font-semibold text-lg shadow hover:scale-105 transition disabled:opacity-50 disabled:cursor-not-allowed">
+          <span id="generateBtnText">Generate Image</span>
+          <span id="loadingSpinner" class="hidden ml-2 animate-spin">⏳</span>
+        </button>
+      </div>
+    </section>
+    <section>
+      <h3 class="text-2xl font-bold text-gray-900 dark:text-white mb-4">Generated Images</h3>
+      <div id="imageGallery" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"></div>
+      <div id="emptyState" class="text-center py-12 text-gray-400 dark:text-gray-500">No images generated yet.</div>
+    </section>
+  </main>
 
-    <!-- Custom JavaScript -->
-    <script src="script.js"></script>
+  <!-- Footer -->
+  <footer class="bg-white dark:bg-gray-800 border-t border-gray-200 dark:border-gray-700 py-6 text-center text-gray-600 dark:text-gray-400">
+    © 2024 ArtVision AI. Contact: <a href="mailto:samadus2005@gmail.com" class="text-blue-600 hover:underline">samadus2005@gmail.com</a>
+  </footer>
+
+  <!-- Contact Modal -->
+  <div id="contactModal" class="fixed inset-0 bg-black bg-opacity-50 z-50 hidden">
+    <div class="flex items-center justify-center min-h-screen">
+      <div class="bg-white dark:bg-gray-800 rounded-2xl shadow-2xl max-w-md w-full p-6">
+        <div class="flex justify-between items-center mb-4">
+          <h3 class="text-xl font-bold text-gray-900 dark:text-white">Contact Us</h3>
+          <button id="closeModal" class="text-gray-500 hover:text-gray-700 dark:text-gray-400 dark:hover:text-gray-200 text-2xl">&times;</button>
+        </div>
+        <div class="mb-4">
+          <p class="text-gray-700 dark:text-gray-300">Need more credits? Contact us to purchase additional credits for your AI image generation.</p>
+        </div>
+        <div class="mb-4">
+          <a href="mailto:samadus2005@gmail.com" class="block text-blue-600 hover:underline text-lg">samadus2005@gmail.com</a>
+        </div>
+        <button id="closeModalBtn" class="w-full bg-gradient-to-r from-purple-600 to-blue-600 text-white py-2 rounded-lg font-medium mt-2">Close</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Image Modal -->
+  <div id="imageModal" class="fixed inset-0 bg-black bg-opacity-90 z-50 hidden">
+    <div class="flex items-center justify-center min-h-screen">
+      <div class="relative max-w-2xl w-full">
+        <button id="closeImageModal" class="absolute top-4 right-4 text-white text-2xl">&times;</button>
+        <img id="modalImage" src="" alt="Generated Image" class="w-full h-auto rounded-lg shadow-2xl">
+      </div>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
 </body>
-</html> 
+</html>
